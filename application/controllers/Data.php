@@ -24,13 +24,18 @@ class Data extends CI_Controller
 
 
 
-        echo $this->curl->execute();
+        // echo $this->curl->execute();
+        $result = $this->curl->execute();
+        $response = json_decode($result, true);
+        // print_r()
 
+        // $data['produk'] = json_decode($result);
+        if (isset($response['data'])) {
+            $data['produk'] = $response['data'];
+        } else {
+            $data['produk'] = [];
+        }
 
-        $this->curl->error_code;
-        $this->curl->error_string;
-
-
-        $this->curl->info;
+        $this->load->view('data/produk', $data);
     }
 }
