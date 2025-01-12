@@ -23,7 +23,7 @@
                 <div class="modal-body">
                     <form action="<?php echo site_url('Data/GetData') ?>" method="post">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
                             <input type="text" name="username" class="form-control" required>
 
                         </div>

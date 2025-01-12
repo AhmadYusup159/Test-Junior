@@ -40,8 +40,6 @@ class Data extends CI_Controller
         );
         $this->curl->set_cookies($vars);
 
-
-
         // echo $this->curl->execute();
         $result = $this->curl->execute();
         $response = json_decode($result, true);
@@ -124,8 +122,9 @@ class Data extends CI_Controller
         $this->db->where_in('nama_produk', $nama_produk);
         $query = $this->db->get();
         $name_p = $query->result_array();
+        $this->db->insert_batch('produk', $batch_data);
         if (!$name_p) {
-            $this->db->insert('produk', $data);
+            $this->db->insert_batch('produk', $batch_data);
             $this->session->set_flashdata(
                 'message',
                 'Data berhasil ditambahkan'
