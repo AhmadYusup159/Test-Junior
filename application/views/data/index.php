@@ -24,14 +24,14 @@
                     <form action="<?php echo site_url('Data/GetData') ?>" method="post">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="text" name="username" class="form-control">
+                            <input type="text" name="username" class="form-control" required>
 
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Ambil</button>
                     </form>
                 </div>
             </div>

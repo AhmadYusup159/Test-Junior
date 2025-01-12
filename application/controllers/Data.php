@@ -29,12 +29,15 @@ class Data extends CI_Controller
         $this->curl->create('https://recruitment.fastprint.co.id/tes/api_tes_programmer');
 
         $post = array(
-            'username' => 'tesprogrammer130125C00',
-            'password' => '2fae13047e2dc3913c8a76a579164647'
+            'username' => htmlspecialchars($this->input->post('username', true)),
+            'password' => md5($this->input->post('password'))
         );
         $this->curl->post($post);
 
-        $vars = array('foo' => 'bar');
+        $vars = array(
+            'username' => htmlspecialchars($this->input->post('username', true)),
+            'password' => md5($this->input->post('password'))
+        );
         $this->curl->set_cookies($vars);
 
 
@@ -50,8 +53,10 @@ class Data extends CI_Controller
         } else {
             $data['produk'] = [];
         }
-
+        $this->load->view('data/asset/header');
+        $this->load->view('data/asset/sidebar');
         $this->load->view('data/produk', $data);
+        $this->load->view('data/asset/footer');
     }
     public function SaveData()
     {
