@@ -122,7 +122,6 @@ class Data extends CI_Controller
         $this->db->where_in('nama_produk', $nama_produk);
         $query = $this->db->get();
         $name_p = $query->result_array();
-        $this->db->insert_batch('produk', $batch_data);
         if (!$name_p) {
             $this->db->insert_batch('produk', $batch_data);
             $this->session->set_flashdata(
