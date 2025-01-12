@@ -1,11 +1,16 @@
 <div class="container-fluid pt-5 ps-4 ">
 
     <h3 class="mb-3">Tambah Data</h3>
-    <form action="<?php echo site_url('Data/SaveInsert') ?>" method="post">
+    <form action="<?php echo site_url('Data/SaveUpdate') ?>" method="post">
         <div class="mb-3">
+            <?php foreach ($produk as $val) { ?>
+                <input type="hidden" name="id_produk" value="<?php echo $val['id_produk']; ?>" class="form-control">
+            <?php } ?>
             <label class="form-label">Nama Produk</label>
             <?php echo form_error('nama_produk'); ?>
-            <input type="text" name="nama_produk" class="form-control">
+            <?php foreach ($produk as $val) { ?>
+                <input type="text" name="nama_produk" value="<?php echo $val['nama_produk']; ?>" class="form-control">
+            <?php } ?>
         </div>
         <div class="mb-3">
             <label class="form-label">Kategori</label>
@@ -20,7 +25,10 @@
         <div class="mb-3">
             <?php echo form_error('harga'); ?>
             <label class="form-label">Harga Produk</label>
-            <input type="number" min="0" name="harga" class="form-control" required>
+            <?php foreach ($produk as $val) { ?>
+                <input type="number" min="0" value="<?php echo $val['harga']; ?>" name="harga" class="form-control" required>
+            <?php } ?>
+
         </div>
         <div class="mb-3">
             <label class="form-label">Status Produk</label>

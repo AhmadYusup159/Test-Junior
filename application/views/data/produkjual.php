@@ -8,7 +8,6 @@
                     <th>Kategori</th>
                     <th>Harga</th>
                     <th>Status</th>
-                    <th colspan="2">Aksi</th>
                 </tr>
             </thead>
             <tbody>
