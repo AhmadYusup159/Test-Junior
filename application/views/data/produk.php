@@ -85,7 +85,8 @@
                     <input type="hidden" name="status[]" value="<?= $item['status'] ?>" class="form-control">
                 <?php endforeach; ?>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a type="button" href="<?php echo site_url('Data/Index') ?>" class="btn btn-secondary">Batal</a>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -7,15 +7,30 @@ class Data extends CI_Controller
 
     public function Index()
     {
-        $this->load->view('data/index');
+        $this->db->select('*');
+        $this->db->from('produk');
+        $query_p = $this->db->get();
+        $this->db->select('*');
+        $this->db->from('kategori');
+        $query_k = $this->db->get();
+        $this->db->select('*');
+        $this->db->from('status');
+        $query_s = $this->db->get();
+        $data['produk'] = $query_p->result_array();
+        $data['kategori'] = $query_k->result_array();
+        $data['status'] = $query_s->result_array();
+        $this->load->view('data/asset/header');
+        $this->load->view('data/asset/sidebar');
+        $this->load->view('data/index', $data);
+        $this->load->view('data/asset/footer');
     }
     public function GetData()
     {
         $this->curl->create('https://recruitment.fastprint.co.id/tes/api_tes_programmer');
 
         $post = array(
-            'username' => 'tesprogrammer120125C23',
-            'password' => '20d9c74411e2684a9ee34d43767b6a06'
+            'username' => 'tesprogrammer130125C00',
+            'password' => '2fae13047e2dc3913c8a76a579164647'
         );
         $this->curl->post($post);
 
@@ -105,27 +120,17 @@ class Data extends CI_Controller
         $query = $this->db->get();
         $name_p = $query->result_array();
         if (!$name_p) {
-            $this->db->insert_batch('produk', $batch_data);
+            $this->db->insert('produk', $data);
+            $this->session->set_flashdata(
+                'message',
+                'Data Siswa berhasil ditambahkan dengan ID'
+            );
+        } else {
+            $this->session->set_flashdata('message', 'Gagal menambahkan data');
         }
+        redirect('Data/Index');
     }
 
-
-    public function ViewAllData()
-    {
-        $this->db->select('*');
-        $this->db->from('produk');
-        $query_p = $this->db->get();
-        $this->db->select('*');
-        $this->db->from('kategori');
-        $query_k = $this->db->get();
-        $this->db->select('*');
-        $this->db->from('status');
-        $query_s = $this->db->get();
-        $data['produk'] = $query_p->result_array();
-        $data['kategori'] = $query_k->result_array();
-        $data['status'] = $query_s->result_array();
-        $this->load->view('data/allproduk', $data);
-    }
     public function ViewDataJual()
     {
         $this->db->select('*');
@@ -141,6 +146,62 @@ class Data extends CI_Controller
         $data['produk'] = $query_p->result_array();
         $data['kategori'] = $query_k->result_array();
         $data['status'] = $query_s->result_array();
+        $this->load->view('data/asset/header');
+        $this->load->view('data/asset/sidebar');
         $this->load->view('data/produkjual', $data);
+        $this->load->view('data/asset/footer');
+    }
+    public function AddData()
+    {
+        $this->db->select('*');
+        $this->db->from('kategori');
+        $query_k = $this->db->get();
+        $data['kategori'] = $query_k->result_array();
+        $this->load->view('data/asset/header');
+        $this->load->view('data/asset/sidebar');
+        $this->load->view('data/tambahdata', $data);
+        $this->load->view('data/asset/footer');
+    }
+    public function SaveInsert()
+    {
+        $this->form_validation->set_rules('nama_produk', 'Nama Produk', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+        $this->form_validation->set_rules('status', 'Status', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->db->select('*');
+            $this->db->from('kategori');
+            $query_k = $this->db->get();
+            $data['kategori'] = $query_k->result_array();
+            $this->load->view('data/asset/header');
+            $this->load->view('data/asset/sidebar');
+            $this->load->view('data/tambahdata', $data);
+            $this->load->view('data/asset/footer');
+        } else {
+            $data = array(
+                'nama_produk' => $this->input->post('nama_produk'),
+                'kategori_id' => $this->input->post('kategori'),
+                'harga' => $this->input->post('harga'),
+                'status_id' => $this->input->post('status'),
+            );
+
+            $nama_produk = $this->input->post('nama_produk');
+
+            $this->db->select('nama_produk');
+            $this->db->from('produk');
+            $this->db->where_in('nama_produk', $nama_produk);
+            $query = $this->db->get();
+            $name_p = $query->result_array();
+            if (!$name_p) {
+                $this->db->insert('produk', $data);
+                $this->session->set_flashdata(
+                    'message',
+                    'Data Siswa berhasil ditambahkan dengan ID'
+                );
+            } else {
+                $this->session->set_flashdata('message', 'Gagal menambahkan data');
+            }
+            redirect('Data/Index');
+        }
     }
 }
