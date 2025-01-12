@@ -32,7 +32,6 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>ID Produk</th>
                     <th>Nama Produk</th>
                     <th>Kategori</th>
                     <th>Harga</th>
@@ -41,16 +40,36 @@
             </thead>
             <tbody>
                 <?php if (!empty($produk)): ?>
-                    <?php foreach ($produk as $item): ?>
+                    <?php $no = 1;
+                    foreach ($produk as $item): ?>
                         <tr>
-                            <td><?= $item['no'] ?></td>
-                            <td><?= $item['id_produk'] ?></td>
+                            <td><?= $no++ ?></td>
                             <td><?= $item['nama_produk'] ?></td>
-                            <td><?= $item['kategori'] ?></td>
+                            <?php
+                            $nama_kategori = '';
+                            foreach ($kategori as $kate) {
+                                if ($kate['id_kategori'] == $item['kategori_id']) {
+                                    $nama_kategori = $kate['nama_kategori'];
+                                    break;
+                                }
+                            }
+                            ?>
+                            <td><?= $nama_kategori ?></td>
+
                             <td><?= number_format($item['harga'], 0, ',', '.') ?></td>
-                            <td><?= $item['status'] ?></td>
+                            <?php
+                            $nama_status = '';
+                            foreach ($status as $sta) {
+                                if ($sta['id_status'] == $item['status_id']) {
+                                    $nama_status = $sta['nama_status'];
+                                    break;
+                                }
+                            }
+                            ?>
+                            <td><?= $nama_status ?></td>
                         </tr>
                     <?php endforeach; ?>
+
                 <?php else: ?>
                     <tr>
                         <td colspan="6">Tidak ada data produk tersedia.</td>
@@ -58,35 +77,6 @@
                 <?php endif; ?>
             </tbody>
         </table>
-        <form action="<?php echo site_url('Data/SaveData') ?>" method="post">
-
-            <div class="mb-3">
-                <?php foreach ($produk as $item): ?>
-                    <input type="hidden" name="id_produk[]" value="<?= $item['id_produk'] ?>" class="form-control">
-                <?php endforeach; ?>
-            </div>
-            <div class="mb-3">
-                <?php foreach ($produk as $item): ?>
-                    <input type="hidden" name="nama_produk[]" value="<?= $item['nama_produk'] ?>" class="form-control">
-                <?php endforeach; ?>
-            </div>
-            <div class="mb-3">
-                <?php foreach ($produk as $item): ?>
-                    <input type="hidden" name="kategori[]" value="<?= $item['kategori'] ?>" class="form-control">
-                <?php endforeach; ?>
-            </div>
-            <div class="mb-3">
-                <?php foreach ($produk as $item): ?>
-                    <input type="hidden" name="harga[]" value="<?= $item['harga'] ?>" class="form-control">
-                <?php endforeach; ?>
-            </div>
-            <div class="mb-3">
-                <?php foreach ($produk as $item): ?>
-                    <input type="hidden" name="status[]" value="<?= $item['status'] ?>" class="form-control">
-                <?php endforeach; ?>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
