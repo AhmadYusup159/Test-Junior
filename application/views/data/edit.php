@@ -1,6 +1,7 @@
 <div class="container-fluid pt-5 ps-4 ">
 
-    <h3 class="mb-3">Tambah Data</h3>
+    <h3 class="mb-3 ps-5">Edit Produk</h3>
+
     <form action="<?php echo site_url('Data/SaveUpdate') ?>" method="post">
         <div class="mb-3">
             <?php foreach ($produk as $val) { ?>

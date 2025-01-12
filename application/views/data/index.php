@@ -1,4 +1,5 @@
 <div class="container-fluid pt-5 ps-4 ">
+    <h3 class="mb-4 ps-3">Semua Produk</h3>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Ammbil Data
@@ -78,7 +79,7 @@
                             ?>
                             <td><?= $nama_status ?></td>
                             <td class="text-center"><?php echo anchor('Data/EditData/' . $item['id_produk'], '<button type="button" class="btn btn-warning">Edit</button>') ?></td>
-                            <td class="text-center"> <?php echo anchor('main/deleteSiswa/' . $item['id_produk'], '<div onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\');"<button type="button" class="btn btn-danger">Hapus</button></div>') ?></td>
+                            <td class="text-center"> <?php echo anchor('Data/DeleteProduk/' . $item['id_produk'], '<div onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\');"<button type="button" class="btn btn-danger">Hapus</button></div>') ?></td>
                         </tr>
                     <?php endforeach; ?>
 

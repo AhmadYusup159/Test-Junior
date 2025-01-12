@@ -1,4 +1,6 @@
 <div class="container-fluid pt-5 ps-4 ">
+    <h3 class="mb-3 ps-5">Semua Produk Siap Jual</h3>
+
     <div class="mt-3">
         <table>
             <thead>

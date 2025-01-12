@@ -260,4 +260,16 @@ class Data extends CI_Controller
             redirect('Data/Index');
         }
     }
+    public function DeleteProduk($id_produk)
+    {
+
+        if ($id_produk) {
+            $this->db->where('id_produk', $id_produk);
+            $this->db->delete('produk');
+            $this->session->set_flashdata('message', 'Data berhasil dihapus');
+        } else {
+            $this->session->set_flashdata('message', 'Data gagal dihapus');
+        }
+        redirect('Data/Index');
+    }
 }

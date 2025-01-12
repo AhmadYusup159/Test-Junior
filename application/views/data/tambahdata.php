@@ -1,6 +1,6 @@
 <div class="container-fluid pt-5 ps-4 ">
 
-    <h3 class="mb-3">Tambah Data</h3>
+    <h3 class="mb-3">Tambah Produk</h3>
     <form action="<?php echo site_url('Data/SaveInsert') ?>" method="post">
         <div class="mb-3">
             <label class="form-label">Nama Produk</label>
